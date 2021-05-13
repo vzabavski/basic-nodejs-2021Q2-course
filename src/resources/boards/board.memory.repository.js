@@ -1,12 +1,12 @@
-const BOARD_DB = [];
+let BOARD_DB = [];
 
 const getAll = async () => BOARD_DB;
 
 const get = async (id) => BOARD_DB.find(board => board.id === id); 
 
 const remove = async (id) => {
-  BOARD_DB.filter(board => board.id !== id);
-  return 'User has been deleted'
+  BOARD_DB = BOARD_DB.filter(board => board.id !== id);
+  return 'Board has been deleted'
 };
 
 const save = async (board) => {
@@ -14,14 +14,14 @@ const save = async (board) => {
   return board;
 };
 
-const update = async (id, userData) => {
-  const userIndex = BOARD_DB.findIndex(user => user.id === id);
-  const updatedUser = {
+const update = async (id, board) => {
+  const boardIndex = BOARD_DB.findIndex(user => user.id === id);
+  const updatedBoard = {
     id,
-    ...userData
+    ...board
   };
-  BOARD_DB.splice(userIndex, 1, updatedUser);
-  return updatedUser;
+  BOARD_DB.splice(boardIndex, 1, updatedBoard);
+  return updatedBoard;
 }
 
 module.exports = { getAll, get, remove, save, update };
