@@ -7,7 +7,13 @@ const get = (id) => tasksRepo.get(id);
 
 const remove = (id) => tasksRepo.remove(id);
 
-const save = (board) => tasksRepo.save(new Task(board));
+const save = (boardId, task) => {
+    if(!task.boardId) {
+        // eslint-disable-next-line no-param-reassign
+        task.boardId = boardId
+    }
+    return tasksRepo.save(new Task(task))
+};
 
 const update = (id, board) => tasksRepo.update(id, board);
 

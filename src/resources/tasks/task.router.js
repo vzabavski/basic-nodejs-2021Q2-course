@@ -2,12 +2,17 @@ const router = require('express').Router({mergeParams: true});
 const taskService = require('./task.service');
 
 router.route('/').get(async (req, res) => {
-  const tasks = await taskService.getAll(req.params.id);
-  res.json(tasks);
+  try {
+    const tasks = await taskService.getAll(req.params.id);
+    tasks.push(null)
+    res.json(tasks);
+  } catch (error) {
+    res.status(404).send(error);  
+  }
 });
 
 router.route('/').post(async (req, res) => {
-  const newTask = await taskService.save(req.body);
+  const newTask = await taskService.save(req.params.id, req.body);
   res.status(201).json(newTask);
 });
 

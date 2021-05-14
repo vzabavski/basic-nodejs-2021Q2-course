@@ -1,6 +1,12 @@
 let TASK_DB = [];
 
-const getAll = async (boardId) => TASK_DB.filter(task => task.boardId === boardId);
+const getAll = async (boardId) => {
+    const tasks = TASK_DB.filter(task => task.boardId === boardId)
+    if(!tasks) {
+        throw new Error('Not found');
+    }
+    return tasks;
+};
 
 const get = async (id) => {
     const currentTask = TASK_DB.find(task => task.id === id);
