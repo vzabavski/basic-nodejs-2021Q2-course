@@ -35,4 +35,15 @@ const removeBoardsTasks = async (boardId) => {
     return 'The task has been deleted'
 }
 
-module.exports = { getAll, get, remove, save, update, removeBoardsTasks };
+const removeUsersTasks = async (userId) => {
+    TASK_DB = TASK_DB.map(task => {
+        if(task.userId === userId) {
+            // eslint-disable-next-line no-param-reassign
+            task.userId = null;
+        }
+        return task;
+    });
+    return 'The user\'s tasks have been unassign'
+}
+
+module.exports = { getAll, get, remove, save, update, removeBoardsTasks, removeUsersTasks };
