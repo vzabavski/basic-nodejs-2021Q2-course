@@ -8,11 +8,11 @@ const get = (id) => tasksRepo.get(id);
 const remove = (id) => tasksRepo.remove(id);
 
 const save = (boardId, task) => {
+    const taskCopy = task;
     if(!task.boardId) {
-        // eslint-disable-next-line no-param-reassign
-        task.boardId = boardId
+        taskCopy.boardId = boardId
     }
-    return tasksRepo.save(new Task(task))
+    return tasksRepo.save(new Task(taskCopy))
 };
 
 const update = (id, board) => tasksRepo.update(id, board);

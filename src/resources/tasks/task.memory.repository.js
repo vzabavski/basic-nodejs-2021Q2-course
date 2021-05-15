@@ -43,11 +43,12 @@ const removeBoardsTasks = async (boardId) => {
 
 const removeUsersTasks = async (userId) => {
     TASK_DB = TASK_DB.map(task => {
+        const taskCopy = task;
         if(task.userId === userId) {
-            // eslint-disable-next-line no-param-reassign
-            task.userId = null;
+            
+            taskCopy.userId = null;
         }
-        return task;
+        return taskCopy;
     });
     return 'The user\'s tasks have been unassign'
 }
